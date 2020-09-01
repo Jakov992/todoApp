@@ -1,0 +1,33 @@
+
+/* Modal Content */
+.modal {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.width100 {
+    width: 100%;
+}
+
+.fullModal {
+    padding: 0;
+    margin: 0;
+    max-width: none
+}
+
+.modalWidth30 {
+    max-width: 30%;
+}
+
+.modalWidth70 {
+    max-width: 70%;
+}
+
+.childAlignedCenter {
+    text-align: center;
+}
