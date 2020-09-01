@@ -1,46 +1,26 @@
 package com.example.todo.model;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+import java.util.Set;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Task {
+public class Task extends Assignment {
 
-    @Id
-    private long id;
-    private String name;
     private String description;
+
+    @OneToMany(mappedBy = "task")
+    Set<TaskTodo> taskTodoSet;
 
     public Task() {}
 
     public Task(String name) {
-        super();
-        this.name = name;
+        this.setName(name);
     }
 
     public Task(String name, String description) {
-        super();
-        this.name = name;
+        this.setName(name);
         this.description = description;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDescription() {
@@ -54,8 +34,8 @@ public class Task {
     @Override
     public String toString() {
         return "Task{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }
