@@ -31,3 +31,15 @@
 .childAlignedCenter {
     text-align: center;
 }
+
+.borderTasks {
+    border-width: 3px;
+    border-color: black;
+    border-style: solid;
+    text-align: center;
+    padding: 10px;
+}
+
+.darkerBgColor {
+    background-color: darkgrey;
+}
