@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AssignmentController {
@@ -35,8 +36,9 @@ public class AssignmentController {
     }
 
     @PostMapping("/saveTask")
-    public String showFormUpdate(@ModelAttribute Task task) {
+    public String saveTask(@ModelAttribute Task task, RedirectAttributes redirectAttributes) {
         assignmentService.saveTask(task);
+        redirectAttributes.addFlashAttribute("message", "Task successfuly saved!");
         return "redirect:/";
     }
 }

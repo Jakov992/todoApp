@@ -53,7 +53,11 @@
                 </tr>
             </tbody>
         </table>
+        <div th:if="${message}">
+            <div id="flash" class="alert alert-success" role="alert" th:text="${message}"></div>
+        </div>
     </div>
+
 
 </body>
 
@@ -61,7 +65,6 @@
 
 <script>
     function showSaveTask(id) {
-        console.log("Ovo je id " + id);
         $.ajax({
             url:(id === undefined) ? "/addNewTask" : "/updateTask",
             dataType: "html",
@@ -73,6 +76,12 @@
             }
         });
     }
+
+    $(function() {
+        $('#flash').delay(500).fadeIn('normal', function() {
+            $(this).delay(500).fadeOut();
+        });
+    });
 </script>
 
 </html>
