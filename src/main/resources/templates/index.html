@@ -1,23 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Employee Management System</title>
-
-    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/jQuery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</head>
+<head th:insert="header.html"></head>
 <body>
     <div class="container">
+        <h1 style="text-align: center">Tasks lista</h1>
         <div class="row" style="margin-bottom: 20px; margin-top: 20px">
             <div class="col-2">
                 <button th:onclick="|showSaveTask()|" class="btn btn-primary width100">Add new task</button>
             </div>
         </div>
+
         <table class="table table-bordered">
             <thead class="darkerBgColor childAlignedCenter">
                 <tr>
@@ -53,15 +45,15 @@
                 </tr>
             </tbody>
         </table>
+
         <div th:if="${message}">
             <div id="flash" class="alert alert-success" role="alert" th:text="${message}"></div>
         </div>
     </div>
+    <div id="modalContainer" class="modal fade modalWidth30" role="dialog"></div>
 
 
 </body>
-
-<div id="modalContainer" class="modal fade modalWidth30" role="dialog"></div>
 
 <script>
     function showSaveTask(id) {
