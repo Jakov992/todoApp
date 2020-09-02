@@ -1,10 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="header.html"></head>
 <body>
+<div class="container">
+    <h1 style="text-align: center">TODO lista za </h1>
+<!--    TODO: MORAT ĆEMO NAPISAT OVDE I IME TASKA-->
+    <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+        <div class="col-2">
+            <button th:onclick="|showSaveTodo()|" class="btn btn-primary width100">Add new TODO</button>
+        </div>
+    </div>
+
+    <table class="table table-bordered">
+        <thead class="darkerBgColor childAlignedCenter">
+            <tr>
+                <th scope="col" style="width: 20%">TODO list</th>
+                <th scope="col" style="width: 30%">Name</th>
+                <th scope="col" style="width: 20%">Description</th>
+                <th scope="col" style="width: 30%">TODOs</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="todo : ${todoList}" class="childAlignedCenter">
+            </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${message}">
+        <div id="flash" class="alert alert-success" role="alert" th:text="${message}"></div>
+    </div>
+</div>
+<div id="modalContainer" class="modal fade modalWidth30" role="dialog"></div>
+
 
 </body>
+
+<script>
+    function showSaveTodo(id) {
+        $.ajax({
+            url:(id === undefined) ? "/addNewTodo" : "/updateTodo",
+            dataType: "html",
+            data:{id: id},
+            type:'GET',
+            success: function(html){
+                $("#modalContainer").html(html);
+                $("#modalContainer").modal("show");
+            }
+        });
+    }
+
+    $(function() {
+        $('#flash').delay(500).fadeIn('normal', function() {
+            $(this).delay(500).fadeOut();
+        });
+    });
+</script>
+
 </html>

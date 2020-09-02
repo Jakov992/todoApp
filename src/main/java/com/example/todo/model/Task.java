@@ -10,6 +10,7 @@ public class Task extends Assignment {
     private String description;
 
     @OneToMany(mappedBy = "task")
+    public
     Set<TaskTodo> taskTodoSet;
 
     public Task() {}

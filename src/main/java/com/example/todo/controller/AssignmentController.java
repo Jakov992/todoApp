@@ -41,4 +41,12 @@ public class AssignmentController {
         redirectAttributes.addFlashAttribute("message", "Task successfuly saved!");
         return "redirect:/";
     }
+
+    @GetMapping("/viewTodos")
+    public String viewTodos(@RequestParam(name = "taskId") Long taskId, Model model) {
+        Task task = assignmentService.getTaskById(taskId);
+        model.addAttribute("task", task);
+        model.addAttribute("todoList", assignmentService.getAllTodosFromTask(task));
+        return "todo_list";
+    }
 }

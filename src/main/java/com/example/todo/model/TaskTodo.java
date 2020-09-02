@@ -18,4 +18,20 @@ public class TaskTodo {
     @ManyToOne
     @JoinColumn(name = "todo_id")
     Todo todo;
+
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+
+    public Todo getTodo() {
+        return todo;
+    }
+
+    public void setTodo(Todo todo) {
+        this.todo = todo;
+    }
 }
