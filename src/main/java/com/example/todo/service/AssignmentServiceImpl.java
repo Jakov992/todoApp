@@ -42,4 +42,9 @@ public class AssignmentServiceImpl implements AssignmentService {
         }
         return task;
     }
+
+    @Override
+    public void saveTask(Task task) {
+        taskRepository.save(task);
+    }
 }

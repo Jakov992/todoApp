@@ -8,4 +8,5 @@ public interface AssignmentService {
     List<Task> getAllTasks();
     Task getNewTask();
     Task getTaskById(long id);
+    void saveTask(Task task);
 }
