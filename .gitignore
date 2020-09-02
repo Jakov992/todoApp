@@ -41,3 +41,4 @@ mvnw.cmd
 /.mvn/wrapper/MavenWrapperDownloader.java
 /.mvn/wrapper/maven-wrapper.properties
 /.mvn/wrapper/maven-wrapper.jar
+/src/main/resources/static/font-awesome-4.7.0/
