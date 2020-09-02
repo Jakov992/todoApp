@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row" style="margin-bottom: 20px; margin-top: 20px">
             <div class="col-2">
-                <button th:onclick="|showFormUpdate()|" class="btn btn-primary width100">Add new task</button>
+                <button th:onclick="|showSaveTask()|" class="btn btn-primary width100">Add new task</button>
             </div>
         </div>
         <table class="table table-bordered">
@@ -43,7 +43,7 @@
                     <td>
                         <div class="row">
                             <div class="col-sm-6">
-                                <button th:onclick="|showFormUpdate('${task.id}')|" class="btn btn-primary width100">Update</button>
+                                <button th:onclick="|showSaveTask('${task.id}')|" class="btn btn-primary width100">Update</button>
                             </div>
                             <div class="col-sm-6">
                                 <button th:onclick="|showFormDelete('${task.id}')|" class="btn btn-danger width100">Delete</button>
@@ -56,4 +56,23 @@
     </div>
 
 </body>
+
+<div id="modalContainer" class="modal fade modalWidth30" role="dialog"></div>
+
+<script>
+    function showSaveTask(id) {
+        console.log("Ovo je id " + id);
+        $.ajax({
+            url:(id === undefined) ? "/addNewTask" : "/updateTask",
+            dataType: "html",
+            data:{id: id},
+            type:'GET',
+            success: function(html){
+                $("#modalContainer").html(html);
+                $("#modalContainer").modal("show");
+            }
+        });
+    }
+</script>
+
 </html>

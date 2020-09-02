@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface AssignmentService {
     List<Task> getAllTasks();
+    Task getNewTask();
+    Task getTaskById(long id);
 }
