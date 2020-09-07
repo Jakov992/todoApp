@@ -67,4 +67,9 @@ public class AssignmentServiceImpl implements AssignmentService {
         Todo todo = new Todo();
         return todo;
     }
+
+    @Override
+    public void saveTodo(Todo todo) {
+        todoRepository.save(todo);
+    }
 }
