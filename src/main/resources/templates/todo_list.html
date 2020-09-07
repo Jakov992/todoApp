@@ -2,9 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="header.html"></head>
 <body>
+<div id="taskId" th:text="${task.id}" hidden></div>
 <div class="container">
     <h1 style="text-align: center">TODO list for <th:block th:utext="${task.name}"/></h1>
-    <!--    TODO: MORAT ĆEMO NAPISAT OVDE I IME TASKA-->
     <div class="row" style="margin-bottom: 20px; margin-top: 20px">
         <div class="col-2">
             <a th:href="@{/}">
@@ -27,6 +27,21 @@
         </thead>
         <tbody>
         <tr th:each="todo : ${todoList}" class="childAlignedCenter">
+            <td th:text="${task.id}"></td>
+            <td th:text="${task.name}"></td>
+            <td>
+                <i class="fa fa-check" aria-hidden="true" style="color: green"></i>
+            </td>
+            <td>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <button th:onclick="|showSaveTask('${task.id}')|" class="btn btn-primary width100">Update</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button th:onclick="|showFormDelete('${task.id}')|" class="btn btn-danger width100">Delete</button>
+                    </div>
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -50,7 +65,10 @@
         $.ajax({
             url:(id === undefined) ? "/addNewTodo" : "/updateTodo",
             dataType: "html",
-            data:{id: id},
+            data:{
+                id: id,
+                taskId: $("#taskId").text()
+            },
             type:'GET',
             success: function(html){
                 $("#modalContainer").html(html);

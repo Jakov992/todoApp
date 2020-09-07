@@ -49,4 +49,11 @@ public class AssignmentController {
         model.addAttribute("todoList", assignmentService.getAllTodosFromTask(task));
         return "todo_list";
     }
+
+    @GetMapping("/addNewTodo")
+    public String getAddNewTodoForm(@RequestParam(name = "taskId") Long taskId, Model model) {
+        model.addAttribute("todo", assignmentService.getNewTask());
+        model.addAttribute("task", assignmentService.getTaskById(taskId));
+        return "save_todo";
+    }
 }

@@ -61,4 +61,10 @@ public class AssignmentServiceImpl implements AssignmentService {
         }
         return todoList;
     }
+
+    @Override
+    public Todo getNewTodo() {
+        Todo todo = new Todo();
+        return todo;
+    }
 }
