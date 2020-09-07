@@ -26,4 +26,5 @@ public abstract class Assignment {
     public void setName(String name) {
         this.name = name;
     }
+
 }

@@ -6,13 +6,12 @@ import com.example.todo.model.Todo;
 import com.example.todo.repository.TaskRepository;
 import com.example.todo.repository.TaskTodoRepository;
 import com.example.todo.repository.TodoRepository;
+import org.skyscreamer.jsonassert.comparator.CustomComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import javax.transaction.Transactional;
+import java.util.*;
 
 @Service
 public class AssignmentServiceImpl implements AssignmentService {
@@ -59,6 +58,7 @@ public class AssignmentServiceImpl implements AssignmentService {
         for (TaskTodo taskTodo : taskTodoSet) {
             todoList.add(taskTodo.getTodo());
         }
+        Collections.sort(todoList);
         return todoList;
     }
 
@@ -71,7 +71,7 @@ public class AssignmentServiceImpl implements AssignmentService {
     @Override
     public void saveTodo(Todo todo, Long taskId) {
         Task task = getTaskById(taskId);
-        todo = todoRepository.saveAndFlush(todo);
+        todo = todoRepository.save(todo);
         TaskTodo taskTodo = new TaskTodo(task, todo);
         taskTodoRepository.save(taskTodo);
     }
