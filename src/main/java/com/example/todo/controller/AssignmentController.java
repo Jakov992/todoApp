@@ -60,9 +60,9 @@ public class AssignmentController {
                            @PathVariable(value = "taskId") Long taskId,
                            RedirectAttributes redirectAttributes) {
         System.out.println("******************************Ovo je taskId " + taskId);
-        System.out.println(todo.getName());
-        assignmentService.saveTodo(todo);
+
+        assignmentService.saveTodo(todo, taskId);
         redirectAttributes.addFlashAttribute("message", "TODO successfuly saved!");
-        return "redirect:/"; // TODO: OVO ĆEMO PROMINIT DA VRATI NA TODO LIST OD TASK-A
+        return "redirect:/viewTodos?taskId=" + taskId.toString(); // TODO: OVO ĆEMO PROMINIT DA VRATI NA TODO LIST OD TASK-A
     }
 }

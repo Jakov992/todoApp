@@ -1,14 +1,12 @@
 package com.example.todo.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class TaskTodo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     @ManyToOne
@@ -18,6 +16,13 @@ public class TaskTodo {
     @ManyToOne
     @JoinColumn(name = "todo_id")
     Todo todo;
+
+    public TaskTodo() {} // JPA konvencija je da svaki Entity ima defaultni konstruktor(isto tako svaki field mora imat gettere i settere)
+
+    public TaskTodo(Task task, Todo todo) {
+        this.task = task;
+        this.todo = todo;
+    }
 
     public Task getTask() {
         return task;

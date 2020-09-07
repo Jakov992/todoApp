@@ -69,7 +69,10 @@ public class AssignmentServiceImpl implements AssignmentService {
     }
 
     @Override
-    public void saveTodo(Todo todo) {
-        todoRepository.save(todo);
+    public void saveTodo(Todo todo, Long taskId) {
+        Task task = getTaskById(taskId);
+        todo = todoRepository.saveAndFlush(todo);
+        TaskTodo taskTodo = new TaskTodo(task, todo);
+        taskTodoRepository.save(taskTodo);
     }
 }

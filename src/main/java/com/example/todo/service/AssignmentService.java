@@ -12,5 +12,5 @@ public interface AssignmentService {
     void saveTask(Task task);
     List<Todo> getAllTodosFromTask(Task task);
     Todo getNewTodo();
-    void saveTodo(Todo todo);
+    void saveTodo(Todo todo, Long taskId);
 }

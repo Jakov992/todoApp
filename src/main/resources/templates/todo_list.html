@@ -27,8 +27,8 @@
         </thead>
         <tbody>
         <tr th:each="todo : ${todoList}" class="childAlignedCenter">
-            <td th:text="${task.id}"></td>
-            <td th:text="${task.name}"></td>
+            <td th:text="${todo.id}"></td>
+            <td th:text="${todo.name}"></td>
             <td>
                 <i class="fa fa-check" aria-hidden="true" style="color: green"></i>
             </td>
