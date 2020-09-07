@@ -3,9 +3,14 @@
 <head th:insert="header.html"></head>
 <body>
 <div class="container">
-    <h1 style="text-align: center">TODO lista za </h1>
-<!--    TODO: MORAT ĆEMO NAPISAT OVDE I IME TASKA-->
+    <h1 style="text-align: center">TODO list for <th:block th:utext="${task.name}"/></h1>
+    <!--    TODO: MORAT ĆEMO NAPISAT OVDE I IME TASKA-->
     <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+        <div class="col-2">
+            <a th:href="@{/}">
+                <button class="btn btn-info width100">Back</button>
+            </a>
+        </div>
         <div class="col-2">
             <button th:onclick="|showSaveTodo()|" class="btn btn-primary width100">Add new TODO</button>
         </div>
@@ -13,20 +18,22 @@
 
     <table class="table table-bordered" style="margin-bottom: 0">
         <thead class="darkerBgColor childAlignedCenter">
-            <tr>
-                <th scope="col" style="width: 20%">TODO list</th>
-                <th scope="col" style="width: 30%">Name</th>
-                <th scope="col" style="width: 20%">Description</th>
-                <th scope="col" style="width: 30%">TODOs</th>
-            </tr>
+        <tr>
+            <th scope="col" style="width: 20%">ID</th>
+            <th scope="col" style="width: 30%">Name</th>
+            <th scope="col" style="width: 20%">Checked</th>
+            <th scope="col" style="width: 30%">Actions</th>
+        </tr>
         </thead>
         <tbody>
-            <tr th:each="todo : ${todoList}" class="childAlignedCenter">
-            </tr>
+        <tr th:each="todo : ${todoList}" class="childAlignedCenter">
+        </tr>
         </tbody>
     </table>
-    <div class="card card-body bg-light">
-        Well
+    <div th:if="${todoList.isEmpty()}">
+        <div class="card card-body bg-light text-center">
+            TODO list for <th:block th:utext="${task.name}"/> is empty!
+        </div>
     </div>
 
     <div th:if="${message}">
