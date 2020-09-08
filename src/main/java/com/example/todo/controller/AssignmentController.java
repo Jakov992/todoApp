@@ -55,11 +55,20 @@ public class AssignmentController {
         return "save_todo";
     }
 
+    @GetMapping("/updateTodo")
+    public String showFormUpdateTodo(@RequestParam(name = "taskId") Long taskId,
+                                     @RequestParam(name = "id") Long todoId,
+                                     Model model) {
+        model.addAttribute("todo", assignmentService.getTodoById(todoId));
+        model.addAttribute("task", assignmentService.getTaskById(taskId));
+        return "save_todo";
+    }
+
     @PostMapping("/saveTodo/{taskId}")
     public String saveTodo(@ModelAttribute Todo todo,
                            @PathVariable(value = "taskId") Long taskId,
                            RedirectAttributes redirectAttributes) {
-        System.out.println("******************************Ovo je taskId " + taskId);
+        System.out.println("******************************Ovo je todoId " + todo.getId());
 
         assignmentService.saveTodo(todo, taskId);
         redirectAttributes.addFlashAttribute("message", "TODO successfuly saved!");

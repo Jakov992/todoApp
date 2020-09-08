@@ -1,8 +1,6 @@
 <div class="modal-dialog modal-sm fullModal" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="modal-content">
 
-        <input type="hidden" th:field="${task.id}" id="taskId">
-
         <div class="modal-header">
             <h4 th:text="${todo.id} ? 'Edit ' + ${todo.name} : 'Add TODO'"></h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -10,7 +8,6 @@
 
         <div class="modal-body">
             <form th:action="@{/saveTodo/{taskId}(taskId=${task.id})}" th:object="${todo}" method="POST" >
-                <input type="hidden" th:field="${task.id}" th:name="taskId">
                 <input type="hidden" th:field="*{id}" />
                 <input type="text" th:field="*{name}" class="form-control mb-4 col-12" placeholder="Name" required>
                 <button type="submit" class="btn btn-success col-6">

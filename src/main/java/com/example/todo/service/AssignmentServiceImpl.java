@@ -70,9 +70,29 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     public void saveTodo(Todo todo, Long taskId) {
-        Task task = getTaskById(taskId);
         todo = todoRepository.save(todo);
-        TaskTodo taskTodo = new TaskTodo(task, todo);
-        taskTodoRepository.save(taskTodo);
+        saveTaskTodo(todo, taskId);
+    }
+
+    private void saveTaskTodo(Todo todo, Long taskId) {
+        TaskTodo taskTodo = taskTodoRepository.findByTaskIdAndTodoId(taskId, todo.getId());
+        if(taskTodo == null) {
+            Task task = getTaskById(taskId);
+            taskTodo = new TaskTodo(task, todo);
+            taskTodoRepository.save(taskTodo);
+            saveTaskTodo(todo, taskId);
+        }
+    }
+
+    @Override
+    public Todo getTodoById(long id) {
+        Optional<Todo> optionalTodo = todoRepository.findById(id);
+        Todo todo = null;
+        if(optionalTodo.isPresent()) {
+            todo = optionalTodo.get();
+        } else {
+            throw new RuntimeException("Todo not found for id: " + id);
+        }
+        return todo;
     }
 }

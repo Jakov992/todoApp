@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface TaskTodoRepository extends JpaRepository<TaskTodo, Long> {
 
+    TaskTodo findByTaskIdAndTodoId(Long taskId, long id);
 }
