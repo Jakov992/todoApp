@@ -10,6 +10,7 @@ public abstract class Assignment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
+    private boolean isDeleted;
 
     public long getId() {
         return id;
@@ -27,4 +28,7 @@ public abstract class Assignment {
         this.name = name;
     }
 
+    public boolean isDeleted() { return isDeleted; }
+
+    public void setDeleted(boolean deleted) { isDeleted = deleted; }
 }
