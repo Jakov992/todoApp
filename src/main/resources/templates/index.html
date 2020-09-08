@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="header.html"></head>
 <body>
+
     <div class="container">
         <h1 style="text-align: center">Tasks lista</h1>
         <div class="row" style="margin-bottom: 20px; margin-top: 20px">
@@ -52,9 +53,6 @@
     </div>
     <div id="modalContainer" class="modal fade modalWidth30" role="dialog"></div>
 
-
-</body>
-
 <script>
     function showSaveTask(id) {
         $.ajax({
@@ -75,5 +73,9 @@
         });
     });
 </script>
+
+</body>
+
+
 
 </html>

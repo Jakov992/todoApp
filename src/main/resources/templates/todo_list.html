@@ -2,64 +2,64 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="header.html"></head>
 <body>
-<div id="taskId" th:text="${task.id}" hidden></div>
-<div class="container">
-    <h1 style="text-align: center">TODO list for <th:block th:utext="${task.name}"/></h1>
-    <div class="row" style="margin-bottom: 20px; margin-top: 20px">
-        <div class="col-2">
-            <a th:href="@{/}">
-                <button class="btn btn-info width100">Back</button>
-            </a>
-        </div>
-        <div class="col-2">
-            <button th:onclick="|showSaveTodo()|" class="btn btn-primary width100">Add new TODO</button>
-        </div>
-    </div>
 
-    <table class="table table-bordered" style="margin-bottom: 0">
-        <thead class="darkerBgColor childAlignedCenter">
-        <tr>
-            <th scope="col" style="width: 20%">ID</th>
-            <th scope="col" style="width: 30%">Name</th>
-            <th scope="col" style="width: 20%">Checked</th>
-            <th scope="col" style="width: 30%">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="todo : ${todoList}" class="childAlignedCenter">
-            <td th:text="${todo.id}"></td>
-            <td th:text="${todo.name}"></td>
-            <td>
-                <input type="checkbox"
-                       th:checked="${todo.isChecked()}"
-                       th:id="${'checked-' + todo.getId()}"
-                       th:name="${'checked-' + todo.getId()}">
-            </td>
-            <td>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <button th:onclick="|showSaveTask('${task.id}')|" class="btn btn-primary width100">Update</button>
+    <div id="taskId" th:text="${task.id}" hidden></div>
+    <div class="container">
+        <h1 style="text-align: center">TODO list for <th:block th:utext="${task.name}"/></h1>
+        <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+            <div class="col-2">
+                <a th:href="@{/}">
+                    <button class="btn btn-info width100">Back</button>
+                </a>
+            </div>
+            <div class="col-2">
+                <button th:onclick="|showSaveTodo()|" class="btn btn-primary width100">Add new TODO</button>
+            </div>
+        </div>
+
+        <table class="table table-bordered" style="margin-bottom: 0">
+            <thead class="darkerBgColor childAlignedCenter">
+            <tr>
+                <th scope="col" style="width: 20%">ID</th>
+                <th scope="col" style="width: 30%">Name</th>
+                <th scope="col" style="width: 20%">Checked</th>
+                <th scope="col" style="width: 30%">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="todo : ${todoList}" class="childAlignedCenter">
+                <td th:text="${todo.id}"></td>
+                <td th:text="${todo.name}"></td>
+                <td>
+                    <input type="checkbox"
+                           th:checked="${todo.isChecked()}"
+                           th:id="${'checked-' + todo.getId()}"
+                           th:name="${'checked-' + todo.getId()}">
+                </td>
+                <td>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <button th:onclick="|showSaveTask('${task.id}')|" class="btn btn-primary width100">Update</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button th:onclick="|showFormDelete('${task.id}')|" class="btn btn-danger width100">Delete</button>
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <button th:onclick="|showFormDelete('${task.id}')|" class="btn btn-danger width100">Delete</button>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <div th:if="${todoList.isEmpty()}">
-        <div class="card card-body bg-light text-center">
-            TODO list for <th:block th:utext="${task.name}"/> is empty!
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div th:if="${todoList.isEmpty()}">
+            <div class="card card-body bg-light text-center">
+                TODO list for <th:block th:utext="${task.name}"/> is empty!
+            </div>
+        </div>
+
+        <div th:if="${message}">
+            <div id="flash" class="alert alert-success" role="alert" th:text="${message}"></div>
         </div>
     </div>
-
-    <div th:if="${message}">
-        <div id="flash" class="alert alert-success" role="alert" th:text="${message}"></div>
-    </div>
-</div>
-<div id="modalContainer" class="modal fade modalWidth30" role="dialog"></div>
-
+    <div id="modalContainer" class="modal fade modalWidth30" role="dialog"></div>
 
 </body>
 
