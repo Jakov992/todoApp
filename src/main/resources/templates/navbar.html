@@ -1,22 +1,16 @@
-<nav class="navbar navbar-dark" style="background-color: black;">
-    <a class="navbar-brand" href="#"><i class="fa fa-check-square-o" aria-hidden="true">&nbsp;<b style="font-family: Arial">TODO APP</b></i></a>
+<nav class="navbar navbar-dark navbar-expand-lg" style="background-color: black;">
+    <a class="navbar-brand" th:href = "@{/}"><i class="fa fa-check-square-o" aria-hidden="true">&nbsp;<b style="font-family: Arial">TODO APP</b></i></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" th:href = "@{/}">Home <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <span class="navbar-text">
-      Navbar text with an inline element
+          Call us: +012225556621
     </span>
     </div>
 </nav>
