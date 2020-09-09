@@ -18,19 +18,25 @@ public class AssignmentController {
     @GetMapping("/")
     public String viewHomePage(Model model) {
         model.addAttribute("taskList", assignmentService.getAllTasks());
-        return "index";
+        System.out.println("Tu smo rođaci");
+        System.out.println("*****************************************************************");
+        System.out.println("*****************************************************************");
+        System.out.println("*****************************************************************");
+        System.out.println("*****************************************************************");
+        System.out.println("*****************************************************************");
+        return "assignment/index";
     }
 
     @GetMapping("/addNewTask")
     public String getAddNewEmployeeForm(Model model) {
         model.addAttribute("task", assignmentService.getNewTask());
-        return "save_task";
+        return "assignment/save_task";
     }
 
     @GetMapping("/updateTask")
     public String showFormUpdate(@RequestParam(name = "id") Long taskId, Model model) {
         model.addAttribute("task", assignmentService.getTaskById(taskId));
-        return "save_task";
+        return "assignment/save_task";
     }
 
     @PostMapping("/saveTask")
@@ -45,14 +51,14 @@ public class AssignmentController {
         Task task = assignmentService.getTaskById(taskId);
         model.addAttribute("task", task);
         model.addAttribute("todoList", assignmentService.getAllTodosFromTask(task));
-        return "todo_list";
+        return "assignment/todo_list";
     }
 
     @GetMapping("/addNewTodo")
     public String getAddNewTodoForm(@RequestParam(name = "taskId") Long taskId, Model model) {
         model.addAttribute("todo", assignmentService.getNewTask());
         model.addAttribute("task", assignmentService.getTaskById(taskId));
-        return "save_todo";
+        return "assignment/save_todo";
     }
 
     @GetMapping("/updateTodo")
@@ -61,7 +67,7 @@ public class AssignmentController {
                                      Model model) {
         model.addAttribute("todo", assignmentService.getTodoById(todoId));
         model.addAttribute("task", assignmentService.getTaskById(taskId));
-        return "save_todo";
+        return "assignment/save_todo";
     }
 
     @PostMapping("/saveTodo/{taskId}")
