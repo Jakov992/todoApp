@@ -59,6 +59,7 @@
         <div th:if="${message}">
             <div id="flash" class="alert alert-success" role="alert" th:text="${message}"></div>
         </div>
+        <div id="flashAjax" class="alert alert-success" role="alert" style="display: none" >Checkbox saved!</div>
     </div>
     <div id="modalContainer" class="modal fade modalWidth30" role="dialog"></div>
 
@@ -107,7 +108,7 @@
             type:'GET',
             success: function(json){
                 if(json.isOk == "true") {
-                    console.log("aaaaaaaaaaaa")
+                    $("#flashAjax").show().fadeOut(1000);
                 }
             }, error: function (json) {
                 console.log("ERRORR")
