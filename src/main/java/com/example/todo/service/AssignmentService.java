@@ -15,4 +15,5 @@ public interface AssignmentService {
     void saveTodo(Todo todo, Long taskId);
     Todo getTodoById(long id);
     void deleteTodo(Todo todo);
+    void saveCheckbox(long todoId, boolean isChecked);
 }

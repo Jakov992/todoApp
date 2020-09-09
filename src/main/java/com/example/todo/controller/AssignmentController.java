@@ -4,10 +4,14 @@ import com.example.todo.model.Task;
 import com.example.todo.model.Todo;
 import com.example.todo.service.AssignmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class AssignmentController {
@@ -89,5 +93,14 @@ public class AssignmentController {
         assignmentService.deleteTodo(todo);
         redirectAttributes.addFlashAttribute("message", "TODO successfuly deleted!");
         return "redirect:/viewTodos?taskId=" + taskId.toString();
+    }
+
+    @GetMapping("/saveCheckbox")
+    public ResponseEntity<HashMap<String, String>> saveCheckbox(@RequestParam(name = "todoId") Long todoId,
+                                                                @RequestParam(name = "isChecked") Boolean isChecked) {
+        assignmentService.saveCheckbox(todoId, isChecked);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("isOk", "true");
+        return ResponseEntity.ok(map);
     }
 }

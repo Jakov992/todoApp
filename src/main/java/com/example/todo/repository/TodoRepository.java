@@ -9,7 +9,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TodoRepository extends JpaRepository<Todo, Long> {
+
     @Modifying
     @Query("update Todo t set t.isDeleted = true where t.id = :todoId")
     void deleteTodoById(@Param(value = "todoId") long todoId);
+
+    @Modifying
+    @Query("update Todo t set t.isChecked = :isChecked where t.id = :todoId")
+    void saveCheckbox(@Param(value = "todoId") long todoId, @Param(value = "isChecked") boolean isChecked);
 }

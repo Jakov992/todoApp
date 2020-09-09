@@ -34,7 +34,8 @@
                     <input type="checkbox"
                            th:checked="${todo.isChecked()}"
                            th:id="${'checked-' + todo.getId()}"
-                           th:name="${'checked-' + todo.getId()}">
+                           th:name="${'checked-' + todo.getId()}"
+                           th:onchange="|saveCheckbox('${todo.id}')|">
                 </td>
                 <td>
                     <div class="row">
@@ -92,6 +93,24 @@
             success: function(html){
                 $("#modalContainer").html(html);
                 $("#modalContainer").modal("show");
+            }
+        });
+    }
+
+    function saveCheckbox(todoId) {
+        $.ajax({
+            url:"/saveCheckbox",
+            data:{
+                todoId: todoId,
+                isChecked: $('#checked-' + todoId).prop("checked")
+            },
+            type:'GET',
+            success: function(json){
+                if(json.isOk == "true") {
+                    console.log("aaaaaaaaaaaa")
+                }
+            }, error: function (json) {
+                console.log("ERRORR")
             }
         });
     }

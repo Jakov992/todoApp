@@ -101,4 +101,9 @@ public class AssignmentServiceImpl implements AssignmentService {
     public void deleteTodo(Todo todo) {
         todoRepository.deleteTodoById(todo.getId());
     }
+
+    @Override
+    public void saveCheckbox(long todoId, boolean isChecked) {
+        todoRepository.saveCheckbox(todoId, isChecked);
+    }
 }
