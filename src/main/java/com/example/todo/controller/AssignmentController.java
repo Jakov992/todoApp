@@ -18,12 +18,6 @@ public class AssignmentController {
     @GetMapping("/")
     public String viewHomePage(Model model) {
         model.addAttribute("taskList", assignmentService.getAllTasks());
-        System.out.println("Tu smo rođaci");
-        System.out.println("*****************************************************************");
-        System.out.println("*****************************************************************");
-        System.out.println("*****************************************************************");
-        System.out.println("*****************************************************************");
-        System.out.println("*****************************************************************");
         return "assignment/index";
     }
 
@@ -74,10 +68,26 @@ public class AssignmentController {
     public String saveTodo(@ModelAttribute Todo todo,
                            @PathVariable(value = "taskId") Long taskId,
                            RedirectAttributes redirectAttributes) {
-        System.out.println("******************************Ovo je todoId " + todo.getId());
-
         assignmentService.saveTodo(todo, taskId);
         redirectAttributes.addFlashAttribute("message", "TODO successfuly saved!");
-        return "redirect:/viewTodos?taskId=" + taskId.toString(); // TODO: OVO ĆEMO PROMINIT DA VRATI NA TODO LIST OD TASK-A
+        return "redirect:/viewTodos?taskId=" + taskId.toString();
+    }
+
+    @GetMapping("/showDeleteTodoForm")
+    public String showDeleteTodoForm(@RequestParam(name = "taskId") Long taskId,
+                                     @RequestParam(name = "id") Long todoId,
+                                     Model model) {
+        model.addAttribute("task", assignmentService.getTaskById(taskId));
+        model.addAttribute("todo", assignmentService.getTodoById(todoId));
+        return "assignment/deleteTodoForm";
+    }
+
+    @PostMapping("/deleteTodo/{taskId}")
+    public String deleteTodo(@ModelAttribute Todo todo,
+                             @PathVariable(value = "taskId") Long taskId,
+                             RedirectAttributes redirectAttributes) {
+        assignmentService.deleteTodo(todo);
+        redirectAttributes.addFlashAttribute("message", "TODO successfuly deleted!");
+        return "redirect:/viewTodos?taskId=" + taskId.toString();
     }
 }

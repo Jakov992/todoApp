@@ -22,9 +22,7 @@ public class Todo extends Assignment implements Comparable<Todo> {
 
     @Override
     public String toString() {
-        return "Todo{" +
-                "isChecked=" + isChecked +
-                '}';
+        return getName();
     }
 
     @Override

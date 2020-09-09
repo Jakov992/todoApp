@@ -34,10 +34,6 @@ public class Task extends Assignment {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "id=" + getId() +
-                ", name='" + getName() + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return getName();
     }
 }

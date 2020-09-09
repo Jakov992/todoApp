@@ -42,7 +42,7 @@
                             <button th:onclick="|showSaveTodo('${todo.id}')|" class="btn btn-primary width100">Update</button>
                         </div>
                         <div class="col-sm-6">
-                            <button th:onclick="|showDeleteTodo('${todo.id}')|" class="btn btn-danger width100">Delete</button>
+                            <button th:onclick="|showDeleteTodoForm('${todo.id}')|" class="btn btn-danger width100">Delete</button>
                         </div>
                     </div>
                 </td>
@@ -67,6 +67,22 @@
     function showSaveTodo(id) {
         $.ajax({
             url:(id === undefined) ? "/addNewTodo" : "/updateTodo",
+            dataType: "html",
+            data:{
+                id: id,
+                taskId: $("#taskId").text()
+            },
+            type:'GET',
+            success: function(html){
+                $("#modalContainer").html(html);
+                $("#modalContainer").modal("show");
+            }
+        });
+    }
+
+    function showDeleteTodoForm(id) {
+        $.ajax({
+            url:"/showDeleteTodoForm",
             dataType: "html",
             data:{
                 id: id,

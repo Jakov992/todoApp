@@ -1,0 +1,24 @@
+<div class="modal-dialog modal-sm fullModal" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h4 class="modal-title"><span th:text="'Delete ' + ${todo}"></span></h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+            <form th:action="@{/deleteTodo/{taskId}(taskId=${task.id})}" th:object="${todo}" method="POST">
+                <input type="hidden" th:field="*{id}" />
+                <h2 class="childAlignedCenter">Are you sure?</h2>
+                <div class="row">
+                    <div class="col-6 childAlignedCenter">
+                        <button type="submit" class="btn btn-danger col-6"> YES</button>
+                    </div>
+                    <div class="col-6 childAlignedCenter">
+                        <button type="submit" class="btn btn-success col-6" data-dismiss="modal"> NO</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

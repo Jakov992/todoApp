@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.*;
 
+@Transactional
 @Service
 public class AssignmentServiceImpl implements AssignmentService {
 
@@ -59,6 +60,7 @@ public class AssignmentServiceImpl implements AssignmentService {
             todoList.add(taskTodo.getTodo());
         }
         Collections.sort(todoList);
+        todoList.removeIf(todo -> todo.isDeleted());
         return todoList;
     }
 
@@ -80,7 +82,6 @@ public class AssignmentServiceImpl implements AssignmentService {
             Task task = getTaskById(taskId);
             taskTodo = new TaskTodo(task, todo);
             taskTodoRepository.save(taskTodo);
-            saveTaskTodo(todo, taskId);
         }
     }
 
@@ -94,5 +95,10 @@ public class AssignmentServiceImpl implements AssignmentService {
             throw new RuntimeException("Todo not found for id: " + id);
         }
         return todo;
+    }
+
+    @Override
+    public void deleteTodo(Todo todo) {
+        todoRepository.deleteTodoById(todo.getId());
     }
 }
