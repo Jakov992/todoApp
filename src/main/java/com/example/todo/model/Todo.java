@@ -5,7 +5,7 @@ import javax.persistence.OneToMany;
 import java.util.Set;
 
 @Entity
-public class Todo extends Assignment implements Comparable<Todo> {
+public class Todo extends Assignment {
 
     private boolean isChecked;
 
@@ -23,14 +23,5 @@ public class Todo extends Assignment implements Comparable<Todo> {
     @Override
     public String toString() {
         return getName();
-    }
-
-    @Override
-    public int compareTo(Todo todo) {
-        if(this.getId() > todo.getId()) {
-            return 1;
-        } else {
-            return -1;
-        }
     }
 }
