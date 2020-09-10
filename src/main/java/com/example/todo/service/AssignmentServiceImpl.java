@@ -29,6 +29,7 @@ public class AssignmentServiceImpl implements AssignmentService {
 
         List<Task> taskList = taskRepository.findAll();
         taskList.removeIf(task -> task.isDeleted());
+        Collections.sort(taskList);
 
         return taskList;
     }

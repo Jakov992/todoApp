@@ -4,9 +4,7 @@ import com.example.todo.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class StatisticsServiceImpl implements StatisticsService{
@@ -17,7 +15,7 @@ public class StatisticsServiceImpl implements StatisticsService{
     @Override
     public Map<String, Integer> getTaskNamePercentageMap(){
 
-        Map<String, Integer> taskNamePercentageMap = new HashMap<String, Integer>();
+        Map<String, Integer> taskNamePercentageMap = new LinkedHashMap<String, Integer>();
 
         List<Task> taskList = assignmentService.getAllTasks();
         Map<Long, Integer> percentageOfTaskMap = assignmentService.getPercentageOfTaskMap();
