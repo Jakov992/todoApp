@@ -26,7 +26,11 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     public List<Task> getAllTasks() {
-        return taskRepository.findAll();
+
+        List<Task> taskList = taskRepository.findAll();
+        taskList.removeIf(task -> task.isDeleted());
+
+        return taskList;
     }
 
     @Override
@@ -106,4 +110,32 @@ public class AssignmentServiceImpl implements AssignmentService {
     public void saveCheckbox(long todoId, boolean isChecked) {
         todoRepository.saveCheckbox(todoId, isChecked);
     }
+
+    @Override
+    public Map<Long, Integer> getPercentageOfTaskMap() {
+
+        Map<Long, Integer> percentageOfTaskMap = new HashMap<Long, Integer>();
+        List<Task> taskList = getAllTasks();
+        taskList.forEach(task -> {
+            Integer percentage = getPercentageOfEachTask(task);
+            percentageOfTaskMap.put(task.getId(), percentage);
+        });
+
+        return percentageOfTaskMap;
+    }
+
+    private Integer getPercentageOfEachTask(Task task) {
+
+        Integer numberOfCheckedAndNotDeletedTodos = 0;
+        Integer numberOfNonDeletedTodos = 0;
+
+
+
+        Integer percentage = 0;
+
+        return percentage;
+    }
+
+    private Integer getNumberOfCheckedAnd
+
 }

@@ -21,6 +21,7 @@ public class AssignmentController {
 
     @GetMapping("/")
     public String viewHomePage(Model model) {
+        model.addAttribute("percentageOfTaskMap", assignmentService.getPercentageOfTaskMap());
         model.addAttribute("taskList", assignmentService.getAllTasks());
         return "assignment/index";
     }
