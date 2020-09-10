@@ -57,6 +57,9 @@ public class AssignmentServiceImpl implements AssignmentService {
     }
 
     @Override
+    public void deleteTask(Task task) {taskRepository.deleteTaskById(task.getId());}
+
+    @Override
     public List<Todo> getAllTodosFromTask(Task task) {
         List<Todo> todoList = new ArrayList<Todo>();
         Set<TaskTodo> taskTodoSet = task.taskTodoSet;

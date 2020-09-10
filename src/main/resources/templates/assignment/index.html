@@ -44,7 +44,7 @@
                                 <button th:onclick="|showSaveTask('${task.id}')|" class="btn btn-primary width100">Update</button>
                             </div>
                             <div class="col-sm-6">
-                                <button th:onclick="|showFormDelete('${task.id}')|" class="btn btn-danger width100">Delete</button>
+                                <button th:onclick="|showDeleteTask('${task.id}')|" class="btn btn-danger width100">Delete</button>
                             </div>
                         </div>
                     </td>
@@ -62,6 +62,19 @@
     function showSaveTask(id) {
         $.ajax({
             url:(id === undefined) ? "/addNewTask" : "/updateTask",
+            dataType: "html",
+            data:{id: id},
+            type:'GET',
+            success: function(html){
+                $("#modalContainer").html(html);
+                $("#modalContainer").modal("show");
+            }
+        });
+    }
+
+    function showDeleteTask(id) {
+        $.ajax({
+            url:"/showDeleteTask",
             dataType: "html",
             data:{id: id},
             type:'GET',

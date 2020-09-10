@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class AssignmentController {
@@ -42,6 +41,21 @@ public class AssignmentController {
     public String saveTask(@ModelAttribute Task task, RedirectAttributes redirectAttributes) {
         assignmentService.saveTask(task);
         redirectAttributes.addFlashAttribute("message", "Task successfuly saved!");
+        return "redirect:/";
+    }
+
+    @GetMapping("/showDeleteTask")
+    public String showDeleteTaskForm(@RequestParam(name = "id") Long taskId,
+                                     Model model) {
+        model.addAttribute("task", assignmentService.getTaskById(taskId));
+        return "assignment/delete_task_form";
+    }
+
+    @PostMapping("/deleteTask")
+    public String deleteTodo(@ModelAttribute Task task,
+                             RedirectAttributes redirectAttributes) {
+        assignmentService.deleteTask(task);
+        redirectAttributes.addFlashAttribute("message", "Task successfuly deleted!");
         return "redirect:/";
     }
 
@@ -84,7 +98,7 @@ public class AssignmentController {
                                      Model model) {
         model.addAttribute("task", assignmentService.getTaskById(taskId));
         model.addAttribute("todo", assignmentService.getTodoById(todoId));
-        return "assignment/deleteTodoForm";
+        return "assignment/delete_todo_form";
     }
 
     @PostMapping("/deleteTodo/{taskId}")
