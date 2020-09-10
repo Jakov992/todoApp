@@ -1,6 +1,9 @@
 package com.example.todo.service;
 
 import com.example.todo.model.Task;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,19 +16,25 @@ public class StatisticsServiceImpl implements StatisticsService{
     private AssignmentService assignmentService;
 
     @Override
-    public Map<String, Integer> getTaskNamePercentageMap(){
+    public JSONArray getTaskNamePercentageMap(){
 
         Map<String, Integer> taskNamePercentageMap = new LinkedHashMap<String, Integer>();
 
         List<Task> taskList = assignmentService.getAllTasks();
         Map<Long, Integer> percentageOfTaskMap = assignmentService.getPercentageOfTaskMap();
+        JSONArray array = new JSONArray();
 
         for (Task task : taskList) {
-            taskNamePercentageMap.put(task.getName(), percentageOfTaskMap.get(task.getId()));
+            try {
+                JSONObject aaa = new JSONObject();
+                aaa.put("name", task.getName());
+                aaa.put("low", percentageOfTaskMap.get(task.getId()));
+                array.put(aaa);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
-        System.out.println(taskNamePercentageMap);
-
-        return taskNamePercentageMap;
+        return array;
     }
 }
