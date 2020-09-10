@@ -136,6 +136,4 @@ public class AssignmentServiceImpl implements AssignmentService {
         return percentage;
     }
 
-    private Integer getNumberOfCheckedAnd
-
 }
