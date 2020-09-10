@@ -126,12 +126,18 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     private Integer getPercentageOfEachTask(Task task) {
 
-        Integer numberOfCheckedAndNotDeletedTodos = 0;
-        Integer numberOfNonDeletedTodos = 0;
+        Integer numberOfNotDeletedTodos = (int) task.taskTodoSet.stream()
+                .filter(taskTodo -> !taskTodo.getTodo().isDeleted()).count();
 
+        Integer numberOfCheckedAndNotDeletedTodos = (int) task.taskTodoSet.stream()
+                .filter(taskTodo -> !taskTodo.getTodo().isDeleted() && taskTodo.getTodo().isChecked()).count();
 
-
-        Integer percentage = 0;
+        Integer percentage;
+        if(numberOfNotDeletedTodos > 0) {
+            percentage = (int)(((float)numberOfCheckedAndNotDeletedTodos / (float)numberOfNotDeletedTodos) * 100);
+        } else {
+            percentage = 100;
+        }
 
         return percentage;
     }
