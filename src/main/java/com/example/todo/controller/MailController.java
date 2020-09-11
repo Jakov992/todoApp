@@ -25,7 +25,7 @@ public class MailController {
     @PostMapping("/sendMail")
     public String sendMail(@ModelAttribute Mail mail) {
         mailService.saveMail(mail);
-
+        mailService.sendSimpleMessage(mail.getSender(), mail.getSubject(), mail.getContent());
         return "redirect:/sendingMailForm";
     }
 }
