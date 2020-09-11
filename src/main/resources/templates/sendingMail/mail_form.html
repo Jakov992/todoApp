@@ -4,7 +4,7 @@
 </head>
 <body>
 <div class="container" style="margin-top: 20px">
-    <form th:action="@{/saveTodo/{taskId}(taskId=${task.id})}" th:object="${todo}" method="post">
+    <form th:action="@{/saveMail}" th:object="${mail}" method="post">
         <div class="form-group">
             <label for="mailAddress">Your email</label>
             <input type="email" class="form-control" id="mailAddress" placeholder="youremail@example.com" required>
