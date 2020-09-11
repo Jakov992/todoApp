@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class MailController {
@@ -23,9 +24,11 @@ public class MailController {
     }
 
     @PostMapping("/sendMail")
-    public String sendMail(@ModelAttribute Mail mail) {
+    public String sendMail(@ModelAttribute Mail mail,
+                           RedirectAttributes redirectAttributes) {
         mailService.saveMail(mail);
         mailService.sendSimpleMessage(mail.getSender(), mail.getSubject(), mail.getContent());
+        redirectAttributes.addFlashAttribute("message", "Mail successfuly sent!");
         return "redirect:/sendingMailForm";
     }
 }

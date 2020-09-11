@@ -28,6 +28,7 @@ public class MailServiceImpl implements MailService{
 
     @Override
     public void saveMail(Mail mail) {
+        mail.setReceiver(environment.getProperty("spring.mail.username"));
         mailRepository.save(mail);
     }
 

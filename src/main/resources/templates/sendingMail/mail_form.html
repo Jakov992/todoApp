@@ -23,7 +23,17 @@
             <button type="submit" class="btn btn-info" data-dismiss="modal">Send</button>
         </div>
     </form>
+    <div th:if="${message}" style="margin-top: 20px;">
+        <div id="flash" class="alert alert-success" role="alert" th:text="${message}"></div>
+    </div>
 </div>
 
+<script>
+    $(function() {
+        $('#flash').delay(500).fadeIn('normal', function() {
+            $(this).delay(500).fadeOut();
+        });
+    });
+</script>
 </body>
 </html>
