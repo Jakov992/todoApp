@@ -16,7 +16,6 @@ public class Mail {
     private String receiver;
     private String subject;
     private String content;
-    private String attachmentName;
 
     public Mail() {}
 
@@ -29,11 +28,6 @@ public class Mail {
     public Mail(String sender, String receiver, String content, String subject) {
         this(sender, receiver, content);
         this.subject = subject;
-    }
-
-    public Mail(String sender, String receiver, String content, String subject, String attachmentName) {
-        this(sender, receiver, content, subject);
-        this.attachmentName = attachmentName;
     }
 
     public long getId() {
@@ -76,14 +70,6 @@ public class Mail {
         this.content = content;
     }
 
-    public String getAttachmentName() {
-        return attachmentName;
-    }
-
-    public void setAttachmentName(String attachmentName) {
-        this.attachmentName = attachmentName;
-    }
-
     @Override
     public String toString() {
         return "Mail{" +
@@ -92,7 +78,6 @@ public class Mail {
                 ", receiver='" + receiver + '\'' +
                 ", subject='" + subject + '\'' +
                 ", content='" + content + '\'' +
-                ", attachmentName='" + attachmentName + '\'' +
                 '}';
     }
 }

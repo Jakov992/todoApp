@@ -3,6 +3,7 @@ package com.example.todo.service;
 import com.example.todo.model.Mail;
 import com.example.todo.repository.MailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ public class MailServiceImpl implements MailService{
     @Autowired
     private JavaMailSender emailSender;
 
+    @Autowired
+    Environment environment;
+
     @Override
     public Mail getNewMail() {
         Mail mail = new Mail();
@@ -28,12 +32,13 @@ public class MailServiceImpl implements MailService{
     }
 
     @Override
-    public void sendSimpleMessage(String to, String subject, String text) {
+    public void sendSimpleMessage(String from, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("todoAppJakov992@gmail.com");
-        message.setTo(to);
+        message.setFrom(from);
+        String mailReceiver = environment.getProperty("spring.mail.username");
+        message.setTo(mailReceiver);
         message.setSubject(subject);
-        message.setText(text);
+        message.setText("This message was sent by: " + from + "\n\n\n" + text);
         emailSender.send(message);
     }
 }

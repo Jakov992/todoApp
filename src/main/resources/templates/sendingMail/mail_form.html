@@ -19,10 +19,6 @@
             <label for="message">Your message</label>
             <textarea class="form-control" id="message" th:field="*{content}" rows="5" required></textarea>
         </div>
-        <div class="form-group">
-            <label for="attachment">Attachment</label>
-            <input type="file" class="form-control-file" id="attachment" th:field="*{attachmentName}">
-        </div>
         <div class="col-xs-12">
             <button type="submit" class="btn btn-info" data-dismiss="modal">Send</button>
         </div>
