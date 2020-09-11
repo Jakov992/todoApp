@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MailController {
 
     @GetMapping("/sendingMailForm")
-    public String viewStatistics(Model model) {
+    public String sendingMailForm(Model model) {
         return "sendingMail/mail_form";
     }
 }
