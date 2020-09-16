@@ -22,8 +22,7 @@ public class MailServiceImpl implements MailService{
 
     @Override
     public Mail getNewMail() {
-        Mail mail = new Mail();
-        return mail;
+        return new Mail();
     }
 
     @Override
@@ -37,6 +36,7 @@ public class MailServiceImpl implements MailService{
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         String mailReceiver = environment.getProperty("spring.mail.username");
+        assert mailReceiver != null;
         message.setTo(mailReceiver);
         message.setSubject(subject);
         message.setText("This message was sent by: " + from + "\n\n\n" + text);

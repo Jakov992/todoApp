@@ -1,5 +1,6 @@
 package com.example.todo.service;
 
+import com.example.todo.model.Assignment;
 import com.example.todo.model.Task;
 import com.example.todo.model.TaskTodo;
 import com.example.todo.model.Todo;
@@ -28,7 +29,7 @@ public class AssignmentServiceImpl implements AssignmentService {
     public List<Task> getAllTasks() {
 
         List<Task> taskList = taskRepository.findAll();
-        taskList.removeIf(task -> task.isDeleted());
+        taskList.removeIf(Assignment::isDeleted);
         Collections.sort(taskList);
 
         return taskList;
@@ -36,8 +37,7 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     public Task getNewTask() {
-        Task task = new Task();
-        return task;
+        return new Task();
     }
 
     @Override
@@ -68,14 +68,13 @@ public class AssignmentServiceImpl implements AssignmentService {
             todoList.add(taskTodo.getTodo());
         }
         Collections.sort(todoList);
-        todoList.removeIf(todo -> todo.isDeleted());
+        todoList.removeIf(Assignment::isDeleted);
         return todoList;
     }
 
     @Override
     public Todo getNewTodo() {
-        Todo todo = new Todo();
-        return todo;
+        return new Todo();
     }
 
     @Override
@@ -130,13 +129,13 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     private Integer getPercentageOfEachTask(Task task) {
 
-        Integer numberOfNotDeletedTodos = (int) task.taskTodoSet.stream()
+        int numberOfNotDeletedTodos = (int) task.taskTodoSet.stream()
                 .filter(taskTodo -> !taskTodo.getTodo().isDeleted()).count();
 
-        Integer numberOfCheckedAndNotDeletedTodos = (int) task.taskTodoSet.stream()
+        int numberOfCheckedAndNotDeletedTodos = (int) task.taskTodoSet.stream()
                 .filter(taskTodo -> !taskTodo.getTodo().isDeleted() && taskTodo.getTodo().isChecked()).count();
 
-        Integer percentage;
+        int percentage;
         if(numberOfNotDeletedTodos > 0) {
             percentage = (int)(((float)numberOfCheckedAndNotDeletedTodos / (float)numberOfNotDeletedTodos) * 100);
         } else {
