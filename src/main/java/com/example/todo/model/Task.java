@@ -1,10 +1,16 @@
 package com.example.todo.model;
 
+import lombok.*;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Task extends Assignment {
 
     private String description;
@@ -13,22 +19,12 @@ public class Task extends Assignment {
     public
     Set<TaskTodo> taskTodoSet;
 
-    public Task() {}
-
     public Task(String name) {
         this.setName(name);
     }
 
     public Task(String name, String description) {
         this.setName(name);
-        this.description = description;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
     }
 

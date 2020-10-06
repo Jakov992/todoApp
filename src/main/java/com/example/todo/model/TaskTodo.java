@@ -1,8 +1,15 @@
 package com.example.todo.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class TaskTodo {
 
     @Id
@@ -17,26 +24,8 @@ public class TaskTodo {
     @JoinColumn(name = "todo_id")
     Todo todo;
 
-    public TaskTodo() {} // JPA konvencija je da svaki Entity ima defaultni konstruktor(isto tako svaki field mora imat gettere i settere)
-
     public TaskTodo(Task task, Todo todo) {
         this.task = task;
-        this.todo = todo;
-    }
-
-    public Task getTask() {
-        return task;
-    }
-
-    public void setTask(Task task) {
-        this.task = task;
-    }
-
-    public Todo getTodo() {
-        return todo;
-    }
-
-    public void setTodo(Todo todo) {
         this.todo = todo;
     }
 }

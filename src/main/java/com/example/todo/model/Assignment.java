@@ -1,9 +1,18 @@
 package com.example.todo.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class Assignment implements Comparable<Assignment>{
 
     @Id
@@ -11,26 +20,6 @@ public abstract class Assignment implements Comparable<Assignment>{
     private long id;
     private String name;
     private boolean isDeleted;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isDeleted() { return isDeleted; }
-
-    public void setDeleted(boolean deleted) { isDeleted = deleted; }
 
     @Override
     public int compareTo(Assignment assignment) {
